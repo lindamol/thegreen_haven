@@ -1,13 +1,84 @@
 {% extends 'greenhaven/base.html' %}
+{% load static %}
 
 {% block content %}
-<section class="form-page">
-    <div class="form-card">
-        <h2>Your Cart</h2>
-        <p>Monstera Thai - $120.00 CAD</p>
-        <p>Pink Princess - $150.00 CAD</p>
-        <p><strong>Total: $270.00 CAD</strong></p>
-        <a href="/order/" class="shop-btn">Proceed to Order</a>
-    </div>
-</section>
+
+<div class="cart-overlay">
+    <section class="cart-drawer">
+
+        <!-- HEADER -->
+        <div class="cart-header">
+            <h2>Your cart</h2>
+            <a href="{% url 'home' %}" class="cart-close">&times;</a>
+        </div>
+
+        <!-- LABELS -->
+        <div class="cart-labels">
+            <span>PRODUCT</span>
+            <span>TOTAL</span>
+        </div>
+
+        <!-- ITEMS -->
+        <div class="cart-items">
+            {% if cart_items %}
+                {% for item in cart_items %}
+                    <div class="cart-item">
+
+                        <div class="cart-product">
+                            <img src="{% static item.image %}" alt="{{ item.name }}" class="cart-item-img">
+
+                            <div class="cart-item-info">
+                                <h3>{{ item.name }}</h3>
+                                <p class="cart-price">{{ item.price }}</p>
+
+                                <div class="cart-qty">
+                                    <button type="button">−</button>
+                                    <span>{{ item.quantity }}</span>
+                                    <button type="button">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT SIDE TOTAL (for now same as price) -->
+                        <div class="cart-total">
+                            {{ item.price }}
+                        </div>
+
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="empty-cart">Your cart is empty.</p>
+            {% endif %}
+        </div>
+
+        <!-- FOOTER -->
+        <div class="cart-footer">
+
+            <div class="cart-note">
+                <p>Taxes, discounts and shipping calculated at checkout.</p>
+            </div>
+
+            <div class="cart-summary">
+                <h3>Estimated total</h3>
+                <p>{{ total_price|default:"$0.00 CAD" }}</p>
+            </div>
+
+            <!-- CHECKOUT -->
+            <a href="{% url 'payment' %}" class="checkout-btn">
+                Check out
+            </a>
+
+            <!-- ✅ CLEAR CART BUTTON -->
+            <form method="POST" action="{% url 'clear_cart' %}">
+                {% csrf_token %}
+                <button type="submit" class="clear-cart-btn">
+                    Clear Cart
+                </button>
+            </form>
+
+        </div>
+
+    </section>
+</div>
+
 {% endblock %}

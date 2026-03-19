@@ -363,3 +363,241 @@ body {
 .details-btn:hover {
     background: #25563d;
 }
+.cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.18);
+    display: flex;
+    justify-content: flex-end;
+    z-index: 999;
+}
+
+.cart-drawer {
+    width: 560px;
+    max-width: 100%;
+    height: 100vh;
+    background: #f7f4ec;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.08);
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 26px;
+}
+
+.cart-header h2 {
+    font-size: 34px;
+    font-weight: 500;
+    color: #2f2f2f;
+}
+
+.cart-close {
+    font-size: 42px;
+    text-decoration: none;
+    color: #2f2f2f;
+    line-height: 1;
+}
+
+.cart-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    color: #7a766f;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #ddd7cc;
+    margin-bottom: 18px;
+}
+
+.cart-items {
+    flex: 1;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid #e4dfd4;
+}
+
+.cart-product {
+    display: flex;
+    gap: 18px;
+    flex: 1;
+}
+
+.cart-item-img {
+    width: 120px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.cart-item-info h3 {
+    font-size: 20px;
+    line-height: 1.25;
+    font-weight: 500;
+    color: #2f2f2f;
+    margin-bottom: 10px;
+}
+
+.cart-price {
+    font-size: 18px;
+    color: #4b4b4b;
+    margin-bottom: 14px;
+}
+
+.cart-total {
+    font-size: 20px;
+    font-weight: 500;
+    color: #2f2f2f;
+    white-space: nowrap;
+}
+
+.cart-qty {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #a9a397;
+    border-radius: 999px;
+    overflow: hidden;
+    height: 52px;
+}
+
+.cart-qty button {
+    width: 48px;
+    height: 52px;
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    color: #3a3a3a;
+    cursor: pointer;
+}
+
+.cart-qty span {
+    width: 46px;
+    text-align: center;
+    font-size: 24px;
+    color: #2f2f2f;
+}
+
+.cart-footer {
+    padding-top: 22px;
+}
+
+.cart-note {
+    border-top: 1px solid #ddd7cc;
+    padding-top: 20px;
+    margin-top: 10px;
+}
+
+.cart-note p {
+    font-size: 15px;
+    color: #66625d;
+    margin-bottom: 20px;
+}
+
+.cart-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.cart-summary h3 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #2f2f2f;
+}
+
+.cart-summary p {
+    font-size: 22px;
+    font-weight: 500;
+    color: #2f2f2f;
+}
+
+.checkout-btn {
+    display: block;
+    width: 100%;
+    background: #27563d;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 18px;
+    border-radius: 999px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.checkout-btn:hover {
+    background: #214832;
+}
+
+.empty-cart {
+    font-size: 18px;
+    color: #555;
+    padding: 20px 0;
+}
+.qty-wrapper {
+    margin-top: 24px;
+    margin-bottom: 20px;
+}
+
+.qty-label {
+    display: block;
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.qty-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    height: 70px;
+    padding: 0 18px;
+    border: 2px solid #a9a397;
+    border-radius: 999px;
+    background: transparent;
+}
+
+.qty-box button {
+    background: transparent;
+    border: none;
+    font-size: 34px;
+    color: #2f2f2f;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.qty-box span {
+    display: inline-block;
+    min-width: 28px;
+    text-align: center;
+    font-size: 26px;
+    color: #2f2f2f;
+    font-weight: 500;
+}
+.clear-cart-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 999px;
+    border: 2px solid #999;
+    background: transparent;
+    color: #333;
+    cursor: pointer;
+}
+
+.clear-cart-btn:hover {
+    background: #eee;
+}

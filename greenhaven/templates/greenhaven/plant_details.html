@@ -6,15 +6,23 @@
 <section class="details-page">
     {% if plant %}
     <div class="details-card">
+
         <div class="details-image">
             <img src="{% static plant.image %}" alt="{{ plant.name }}">
         </div>
 
         <div class="details-info">
             <h1>{{ plant.name }}</h1>
+
             <p class="details-price">{{ plant.price }}</p>
-            <p class="details-size"><strong>Size:</strong> {{ plant.size }}</p>
-            <p class="details-stock"><strong>Stock Status:</strong> {{ plant.stock }}</p>
+
+            <p class="details-size">
+                <strong>Size:</strong> {{ plant.size }}
+            </p>
+
+            <p class="details-stock">
+                <strong>Stock Status:</strong> {{ plant.stock }}
+            </p>
 
             <div class="details-description">
                 <h3>Description</h3>
@@ -25,13 +33,30 @@
                 <h3>Care Instructions</h3>
                 <ul>
                     {% for item in plant.care %}
-                    <li>{{ item }}</li>
+                        <li>{{ item }}</li>
                     {% endfor %}
                 </ul>
             </div>
 
-            <button class="details-btn">Add to Cart</button>
+            <form method="POST" action="{% url 'add_to_cart' plant_slug %}">
+                {% csrf_token %}
+
+                <div class="qty-wrapper">
+                    <span class="qty-label">Quantity</span>
+
+                    <div class="qty-box">
+                        <button type="button">−</button>
+                        <span>1</span>
+                        <button type="button">+</button>
+                    </div>
+                </div>
+
+                <input type="hidden" name="quantity" value="1">
+
+                <button type="submit" class="details-btn">Add to Cart</button>
+            </form>
         </div>
+
     </div>
     {% else %}
     <div class="details-card">
