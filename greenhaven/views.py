@@ -48,7 +48,7 @@ PLANTS = {
         'price': '$120.00 CAD',
         'image': 'greenhaven/images/Monstera_Thai.png',
         'size': 'Large',
-        'stock': 'In Stock',
+        'stock': 'Not in Stock',
         'description': 'Monstera Thai has large split leaves with beautiful creamy variegation.',
         'care': [
             'Bright indirect light',
