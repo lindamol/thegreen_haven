@@ -6,9 +6,9 @@
 <section class="hero">
     <div class="hero-overlay">
         <div class="hero-content">
-            <h1>Premium Locally-Grown Plants</h1>
-            <p>Ready-to-Enjoy, Delivered to Your Door</p>
-            <a href="#" class="shop-btn">SHOP NOW</a>
+            <h1>Bring Nature Home</h1>
+            <p>Premium Locally-Grown Plants</p>
+            <a href="#" class="shop-btn">SHOP PLANTS</a>
         </div>
     </div>
 </section>
@@ -25,7 +25,6 @@
             </a>
             <h3><a href="/plant-details/begonia/">Begonia</a></h3>
             <p>$35.00 CAD</p>
-
             <form method="POST" action="{% url 'add_to_cart' 'begonia' %}">
                 {% csrf_token %}
                 <input type="hidden" name="quantity" value="1">
@@ -40,7 +39,6 @@
             </a>
             <h3><a href="/plant-details/marble-queen/">Marble Queen</a></h3>
             <p>$45.00 CAD</p>
-
             <form method="POST" action="{% url 'add_to_cart' 'marble-queen' %}">
                 {% csrf_token %}
                 <input type="hidden" name="quantity" value="1">
@@ -55,7 +53,6 @@
             </a>
             <h3><a href="/plant-details/calathea/">Calathea</a></h3>
             <p>$78.00 CAD</p>
-
             <form method="POST" action="{% url 'add_to_cart' 'calathea' %}">
                 {% csrf_token %}
                 <input type="hidden" name="quantity" value="1">
@@ -70,7 +67,6 @@
             </a>
             <h3><a href="/plant-details/monstera-thai/">Monstera Thai</a></h3>
             <p>$120.00 CAD</p>
-
             <form method="POST" action="{% url 'add_to_cart' 'monstera-thai' %}">
                 {% csrf_token %}
                 <input type="hidden" name="quantity" value="1">
@@ -85,7 +81,6 @@
             </a>
             <h3><a href="/plant-details/pink-princess/">Pink Princess</a></h3>
             <p>$150.00 CAD</p>
-
             <form method="POST" action="{% url 'add_to_cart' 'pink-princess' %}">
                 {% csrf_token %}
                 <input type="hidden" name="quantity" value="1">
@@ -100,7 +95,6 @@
             </a>
             <h3><a href="/plant-details/snake-plant/">Snake Plant</a></h3>
             <p>$55.00 CAD</p>
-
             <form method="POST" action="{% url 'add_to_cart' 'snake-plant' %}">
                 {% csrf_token %}
                 <input type="hidden" name="quantity" value="1">
@@ -115,7 +109,6 @@
             </a>
             <h3><a href="/plant-details/string-of-hearts/">String of Hearts</a></h3>
             <p>$42.00 CAD</p>
-
             <form method="POST" action="{% url 'add_to_cart' 'string-of-hearts' %}">
                 {% csrf_token %}
                 <input type="hidden" name="quantity" value="1">
@@ -130,7 +123,6 @@
             </a>
             <h3><a href="/plant-details/verrucosum/">Verrucosum</a></h3>
             <p>$95.00 CAD</p>
-
             <form method="POST" action="{% url 'add_to_cart' 'verrucosum' %}">
                 {% csrf_token %}
                 <input type="hidden" name="quantity" value="1">
@@ -145,8 +137,49 @@
             </a>
             <h3><a href="/plant-details/monstera-albo/">Monstera Albo</a></h3>
             <p>$135.00 CAD</p>
-
             <form method="POST" action="{% url 'add_to_cart' 'monstera-albo' %}">
+                {% csrf_token %}
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+
+        <!-- ✅ NEW: Jasmine -->
+        <div class="product-card">
+            <a href="/plant-details/jasmine/">
+                <img src="{% static 'greenhaven/images/Jasmine.png' %}" class="product-img">
+            </a>
+            <h3><a href="/plant-details/jasmine/">Jasmine</a></h3>
+            <p>$60.00 CAD</p>
+            <form method="POST" action="{% url 'add_to_cart' 'jasmine' %}">
+                {% csrf_token %}
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+
+        <!-- ✅ NEW: Masoniana -->
+        <div class="product-card">
+            <a href="/plant-details/masoniana/">
+                <img src="{% static 'greenhaven/images/Masoniana.png' %}" class="product-img">
+            </a>
+            <h3><a href="/plant-details/masoniana/">Masoniana</a></h3>
+            <p>$85.00 CAD</p>
+            <form method="POST" action="{% url 'add_to_cart' 'masoniana' %}">
+                {% csrf_token %}
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+
+        <!-- ✅ NEW: Sumatra -->
+        <div class="product-card">
+            <a href="/plant-details/sumatra/">
+                <img src="{% static 'greenhaven/images/Sumatra.png' %}" class="product-img">
+            </a>
+            <h3><a href="/plant-details/sumatra/">Sumatra</a></h3>
+            <p>$70.00 CAD</p>
+            <form method="POST" action="{% url 'add_to_cart' 'sumatra' %}">
                 {% csrf_token %}
                 <input type="hidden" name="quantity" value="1">
                 <button type="submit">Add to Cart</button>
