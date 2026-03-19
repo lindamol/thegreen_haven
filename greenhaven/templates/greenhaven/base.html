@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Haven</title>
+
+    <link rel="stylesheet" href="{% static 'greenhaven/css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="top-bar">
+        <span>CANADA-WIDE SHIPPING WITH UPS</span>
+    </div>
+
+    <header class="main-header">
+        <div class="logo">green<span>haven</span></div>
+
+        <nav class="main-nav">
+            <a href="/">Home</a>
+            <a href="#">Houseplants</a>
+            <a href="#">Pots & Care</a>
+            <a href="#">Terrariums</a>
+            <a href="#">Grow Lamps</a>
+            <a href="/register/">Register</a>
+            <a href="/cart/">Cart</a>
+        </nav>
+
+        <div class="nav-icons">
+            <span>⌕</span>
+            <span>◯</span>
+            <span>👜</span>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+</body>
+</html>

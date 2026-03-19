@@ -1,0 +1,105 @@
+{% extends 'greenhaven/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <h1>Premium Locally-Grown Plants</h1>
+            <p>Ready-to-Enjoy, Delivered to Your Door</p>
+            <a href="#" class="shop-btn">SHOP NOW</a>
+        </div>
+    </div>
+</section>
+
+<section class="best-sellers">
+    <h2>Best Sellers</h2>
+
+    <div class="product-grid">
+
+        <div class="product-card">
+            <a href="/plant-details/begonia/">
+                <img src="{% static 'greenhaven/images/Begonia.png' %}" class="product-img" alt="Begonia">
+            </a>
+            <h3><a href="/plant-details/begonia/">Begonia</a></h3>
+            <p>$35.00 CAD</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="/plant-details/marble-queen/">
+                <img src="{% static 'greenhaven/images/Marble Queen.png' %}" class="product-img" alt="Marble Queen">
+            </a>
+            <h3><a href="/plant-details/marble-queen/">Marble Queen</a></h3>
+            <p>$45.00 CAD</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="/plant-details/calathea/">
+                <img src="{% static 'greenhaven/images/Calathea.png' %}" class="product-img" alt="Calathea">
+            </a>
+            <h3><a href="/plant-details/calathea/">Calathea</a></h3>
+            <p>$78.00 CAD</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="/plant-details/monstera-thai/">
+                <img src="{% static 'greenhaven/images/Monstera_Thai.png' %}" class="product-img" alt="Monstera Thai">
+            </a>
+            <h3><a href="/plant-details/monstera-thai/">Monstera Thai</a></h3>
+            <p>$120.00 CAD</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="/plant-details/pink-princess/">
+                <img src="{% static 'greenhaven/images/Pink Princess.png' %}" class="product-img" alt="Pink Princess">
+            </a>
+            <h3><a href="/plant-details/pink-princess/">Pink Princess</a></h3>
+            <p>$150.00 CAD</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="/plant-details/snake-plant/">
+                <img src="{% static 'greenhaven/images/Snake Plant.png' %}" class="product-img" alt="Snake Plant">
+            </a>
+            <h3><a href="/plant-details/snake-plant/">Snake Plant</a></h3>
+            <p>$55.00 CAD</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="/plant-details/string-of-hearts/">
+                <img src="{% static 'greenhaven/images/String of Hearts.png' %}" class="product-img" alt="String of Hearts">
+            </a>
+            <h3><a href="/plant-details/string-of-hearts/">String of Hearts</a></h3>
+            <p>$42.00 CAD</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="/plant-details/verrucosum/">
+                <img src="{% static 'greenhaven/images/Verrucosum.png' %}" class="product-img" alt="Verrucosum">
+            </a>
+            <h3><a href="/plant-details/verrucosum/">Verrucosum</a></h3>
+            <p>$95.00 CAD</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="/plant-details/monstera-albo/">
+                <img src="{% static 'greenhaven/images/Monstera Albo.png' %}" class="product-img" alt="Monstera Albo">
+            </a>
+            <h3><a href="/plant-details/monstera-albo/">Monstera Albo</a></h3>
+            <p>$135.00 CAD</p>
+            <button>Add to Cart</button>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

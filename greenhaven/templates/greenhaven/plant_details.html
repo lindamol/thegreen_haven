@@ -1,0 +1,46 @@
+{% extends 'greenhaven/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="details-page">
+    {% if plant %}
+    <div class="details-card">
+        <div class="details-image">
+            <img src="{% static plant.image %}" alt="{{ plant.name }}">
+        </div>
+
+        <div class="details-info">
+            <h1>{{ plant.name }}</h1>
+            <p class="details-price">{{ plant.price }}</p>
+            <p class="details-size"><strong>Size:</strong> {{ plant.size }}</p>
+            <p class="details-stock"><strong>Stock Status:</strong> {{ plant.stock }}</p>
+
+            <div class="details-description">
+                <h3>Description</h3>
+                <p>{{ plant.description }}</p>
+            </div>
+
+            <div class="details-care">
+                <h3>Care Instructions</h3>
+                <ul>
+                    {% for item in plant.care %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <button class="details-btn">Add to Cart</button>
+        </div>
+    </div>
+    {% else %}
+    <div class="details-card">
+        <div class="details-info">
+            <h1>Plant not found</h1>
+            <p>This product does not exist.</p>
+        </div>
+    </div>
+    {% endif %}
+</section>
+
+{% endblock %}
