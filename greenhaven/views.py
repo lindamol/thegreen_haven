@@ -252,3 +252,18 @@ def clear_cart(request):
     request.session['cart'] = []
     request.session.modified = True
     return redirect('cart')
+def houseplants(request):
+    all_plants = []
+
+    for slug, plant in PLANTS.items():
+        all_plants.append({
+            'slug': slug,
+            'name': plant['name'],
+            'price': plant['price'],
+            'image': plant['image'],
+            'stock': plant['stock'],
+        })
+
+    return render(request, 'greenhaven/houseplants.html', {
+        'plants': all_plants
+    })

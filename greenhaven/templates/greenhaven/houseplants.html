@@ -1,0 +1,44 @@
+{% extends 'greenhaven/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="houseplants-page">
+    <div class="houseplants-header">
+        <h1>Houseplants</h1>
+        <p>
+            Locally grown, acclimated houseplants delivered Canada-wide.
+            Each indoor plant is repotted in our premium soil mix, ensuring
+            it thrives effortlessly in your home.
+        </p>
+    </div>
+
+    <div class="houseplants-topbar">
+        <div class="filter-text">Filter</div>
+        <div class="sort-text">All Plants</div>
+    </div>
+
+    <div class="product-grid">
+        {% for plant in plants %}
+        <div class="product-card">
+            <a href="{% url 'plant_details' plant.slug %}">
+                <img src="{% static plant.image %}" alt="{{ plant.name }}" class="product-img">
+            </a>
+
+            <h3>
+                <a href="{% url 'plant_details' plant.slug %}">{{ plant.name }}</a>
+            </h3>
+
+            <p>{{ plant.price }}</p>
+
+            <form method="POST" action="{% url 'add_to_cart' plant.slug %}">
+                {% csrf_token %}
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

@@ -10,4 +10,5 @@ urlpatterns = [
     path('plant-details/<str:plant_name>/', views.plant_details, name='plant_details'),
     path('add-to-cart/<str:plant_name>/', views.add_to_cart, name='add_to_cart'),
     path('clear-cart/', views.clear_cart, name='clear_cart'),
+    path('houseplants/', views.houseplants, name='houseplants'),
 ]
