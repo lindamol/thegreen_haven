@@ -180,6 +180,10 @@ def register(request):
     return render(request, 'greenhaven/register.html')
 
 
+def login_view(request):
+    return render(request, 'greenhaven/login.html')
+
+
 def cart(request):
     cart_items = request.session.get('cart', [])
 
@@ -252,6 +256,8 @@ def clear_cart(request):
     request.session['cart'] = []
     request.session.modified = True
     return redirect('cart')
+
+
 def houseplants(request):
     all_plants = []
 
@@ -266,4 +272,23 @@ def houseplants(request):
 
     return render(request, 'greenhaven/houseplants.html', {
         'plants': all_plants
+    })
+def search_plants(request):
+    query = request.GET.get('q', '').strip().lower()
+    results = []
+
+    if query:
+        for slug, plant in PLANTS.items():
+            if query in plant['name'].lower():
+                results.append({
+                    'slug': slug,
+                    'name': plant['name'],
+                    'price': plant['price'],
+                    'image': plant['image'],
+                    'stock': plant['stock'],
+                })
+
+    return render(request, 'greenhaven/search_results.html', {
+        'query': request.GET.get('q', '').strip(),
+        'results': results
     })

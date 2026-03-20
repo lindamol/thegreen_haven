@@ -1,0 +1,40 @@
+{% extends 'greenhaven/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="houseplants-page">
+    <div class="houseplants-header">
+        <h1>Search Results</h1>
+        {% if query %}
+            <p>Showing results for "<strong>{{ query }}</strong>"</p>
+        {% else %}
+            <p>Please enter a plant name to search.</p>
+        {% endif %}
+    </div>
+
+    {% if results %}
+        <div class="product-grid">
+            {% for plant in results %}
+                <div class="product-card">
+                    <img src="{% static plant.image %}" alt="{{ plant.name }}" class="product-img">
+
+                    <h3>
+                        <a href="{% url 'plant_details' plant.slug %}">{{ plant.name }}</a>
+                    </h3>
+
+                    <p>{{ plant.price }}</p>
+
+                    <form action="{% url 'add_to_cart' plant.slug %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        {% if query %}
+            <p style="font-size: 18px; color: #555;">No plants found matching "{{ query }}".</p>
+        {% endif %}
+    {% endif %}
+</section>
+{% endblock %}
