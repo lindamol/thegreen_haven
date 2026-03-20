@@ -127,6 +127,48 @@ PLANTS = {
             'Protect from harsh direct sunlight'
         ]
     },
+    'jasmine': {
+        'name': 'Jasmine',
+        'price': '$60.00 CAD',
+        'image': 'greenhaven/images/Jasmine.png',
+        'size': 'Medium',
+        'stock': 'In Stock',
+        'description': 'A fragrant flowering plant that adds freshness and elegance to indoor spaces.',
+        'care': [
+            'Place in bright indirect light',
+            'Water when the top soil feels dry',
+            'Keep in a warm environment',
+            'Prune lightly to encourage growth'
+        ]
+    },
+    'masoniana': {
+        'name': 'Masoniana',
+        'price': '$85.00 CAD',
+        'image': 'greenhaven/images/Masoniana.png',
+        'size': 'Medium',
+        'stock': 'In Stock',
+        'description': 'A striking foliage plant known for its textured leaves and bold appearance.',
+        'care': [
+            'Provide bright indirect light',
+            'Water moderately',
+            'Avoid overwatering',
+            'Maintain good humidity'
+        ]
+    },
+    'sumatra': {
+        'name': 'Sumatra',
+        'price': '$70.00 CAD',
+        'image': 'greenhaven/images/Sumatra.png',
+        'size': 'Medium',
+        'stock': 'In Stock',
+        'description': 'A beautiful ornamental plant with colorful foliage that stands out in any collection.',
+        'care': [
+            'Keep in filtered light',
+            'Water when soil is slightly dry',
+            'Avoid cold drafts',
+            'Use well-draining soil'
+        ]
+    },
 }
 
 
@@ -204,6 +246,8 @@ def add_to_cart(request, plant_name):
         return redirect('cart')
 
     return redirect('home')
+
+
 def clear_cart(request):
     request.session['cart'] = []
     request.session.modified = True

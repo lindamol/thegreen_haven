@@ -78,7 +78,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'green_haven_db',
         'USER': 'root',
-        'PASSWORD': 'Dona12397#@',
+        'PASSWORD': 'drucim5',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

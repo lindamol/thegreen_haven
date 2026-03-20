@@ -42,16 +42,16 @@
                 {% csrf_token %}
 
                 <div class="qty-wrapper">
-                    <span class="qty-label">Quantity</span>
-
-                    <div class="qty-box">
-                        <button type="button">−</button>
-                        <span>1</span>
-                        <button type="button">+</button>
-                    </div>
+                    <label for="quantity" class="qty-label">Quantity</label>
+                    <input
+                        type="number"
+                        id="quantity"
+                        name="quantity"
+                        value="1"
+                        min="1"
+                        class="qty-input"
+                    >
                 </div>
-
-                <input type="hidden" name="quantity" value="1">
 
                 <button type="submit" class="details-btn">Add to Cart</button>
             </form>
