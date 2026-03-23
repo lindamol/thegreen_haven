@@ -6,19 +6,16 @@
 <div class="cart-overlay">
     <section class="cart-drawer">
 
-        <!-- HEADER -->
         <div class="cart-header">
             <h2>Your cart</h2>
             <a href="{% url 'home' %}" class="cart-close">&times;</a>
         </div>
 
-        <!-- LABELS -->
         <div class="cart-labels">
             <span>PRODUCT</span>
             <span>TOTAL</span>
         </div>
 
-        <!-- ITEMS -->
         <div class="cart-items">
             {% if cart_items %}
                 {% for item in cart_items %}
@@ -39,7 +36,6 @@
                             </div>
                         </div>
 
-                        <!-- RIGHT SIDE TOTAL (for now same as price) -->
                         <div class="cart-total">
                             {{ item.price }}
                         </div>
@@ -51,7 +47,6 @@
             {% endif %}
         </div>
 
-        <!-- FOOTER -->
         <div class="cart-footer">
 
             <div class="cart-note">
@@ -63,12 +58,10 @@
                 <p>{{ total_price|default:"$0.00 CAD" }}</p>
             </div>
 
-            <!-- CHECKOUT -->
-            <a href="{% url 'payment' %}" class="checkout-btn">
+            <a href="{% url 'order_payment' %}" class="checkout-btn">
                 Check out
             </a>
 
-            <!-- ✅ CLEAR CART BUTTON -->
             <form method="POST" action="{% url 'clear_cart' %}">
                 {% csrf_token %}
                 <button type="submit" class="clear-cart-btn">

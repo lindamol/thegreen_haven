@@ -1,0 +1,43 @@
+{% extends 'greenhaven/base.html' %}
+
+{% block content %}
+<section class="form-page">
+    <div class="form-card">
+        <h2>Order & Payment</h2>
+
+        <form id="orderPaymentForm">
+            <input type="text" placeholder="Shipping Address" required>
+            <input type="text" placeholder="City" required>
+            <input type="text" placeholder="Postal Code" required>
+            <input type="text" placeholder="Card Number" required>
+            <input type="text" placeholder="Card Holder Name" required>
+            <input type="text" placeholder="Expiry Date" required>
+            <input type="text" placeholder="CVV" required>
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
+</section>
+
+<!-- ✅ CUSTOM SUCCESS POPUP -->
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <h3>Payment Successful</h3>
+        <p>Your order has been placed successfully 🌿</p>
+        <button onclick="closeModal()">Continue</button>
+    </div>
+</div>
+
+<script>
+document.getElementById("orderPaymentForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // Show modal instead of alert
+    document.getElementById("successModal").style.display = "flex";
+});
+
+function closeModal() {
+    window.location.href = "{% url 'home' %}";
+}
+</script>
+
+{% endblock %}

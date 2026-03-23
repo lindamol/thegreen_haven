@@ -325,6 +325,7 @@ a {
 }
 
 .form-card input {
+    width: 100%;
     padding: 14px 16px;
     border: 1px solid #ddd6c8;
     border-radius: 14px;
@@ -338,6 +339,7 @@ a {
 }
 
 .form-card button {
+    width: 100%;
     background: #2f6f4f;
     color: white;
     border: none;
@@ -667,7 +669,6 @@ a {
     color: #555;
     padding: 20px 0;
     height: 50px;
-
 }
 
 .clear-cart-btn {
@@ -698,7 +699,7 @@ a {
 }
 
 .houseplants-header h1 {
-    font-size: 64px;
+    font-size: 34px;
     font-weight: 500;
     color: #1f1f1f;
     margin-bottom: 20px;
@@ -828,5 +829,86 @@ a {
 
     .cart-drawer {
         width: 100%;
+    }
+}
+
+/* Combined checkout + payment page */
+.form-card input {
+    width: 100%;
+}
+
+.form-card button {
+    width: 100%;
+}
+
+/* ===== SUCCESS MODAL (Order & Payment Popup) ===== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: #f7f3eb;
+    padding: 32px 28px;
+    border-radius: 24px;
+    text-align: center;
+    width: 360px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    animation: scaleUp 0.3s ease;
+}
+
+.modal-content h3 {
+    color: #2f6f4f;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    color: #5a5a5a;
+    font-size: 15px;
+    margin-bottom: 22px;
+}
+
+.modal-content button {
+    background: #2f6f4f;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.modal-content button:hover {
+    background: #24563d;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.9);
+    }
+    to {
+        transform: scale(1);
     }
 }

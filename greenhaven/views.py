@@ -202,12 +202,8 @@ def cart(request):
     })
 
 
-def order(request):
-    return render(request, 'greenhaven/order.html')
-
-
-def payment(request):
-    return render(request, 'greenhaven/payment.html')
+def order_payment(request):
+    return render(request, 'greenhaven/order_payment.html')
 
 
 def plant_details(request, plant_name):
@@ -273,6 +269,8 @@ def houseplants(request):
     return render(request, 'greenhaven/houseplants.html', {
         'plants': all_plants
     })
+
+
 def search_plants(request):
     query = request.GET.get('q', '').strip().lower()
     results = []
