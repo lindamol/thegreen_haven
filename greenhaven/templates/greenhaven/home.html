@@ -17,6 +17,7 @@
     <h2>Best Sellers</h2>
 
     <div class="product-grid">
+
         <div class="product-card">
             <img src="{% static 'greenhaven/images/Begonia.png' %}" alt="Begonia" class="product-img">
             <h3><a href="{% url 'plant_details' 'begonia' %}">Begonia</a></h3>
@@ -56,6 +57,27 @@
                 <button type="submit">Add to Cart</button>
             </form>
         </div>
+
+        <div class="product-card">
+            <img src="{% static 'greenhaven/images/Jasmine.png' %}" alt="Jasmine" class="product-img">
+            <h3><a href="{% url 'plant_details' 'jasmine' %}">Jasmine</a></h3>
+            <p>$52.00 CAD</p>
+            <form action="{% url 'add_to_cart' 'jasmine' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'greenhaven/images/Pink Princess.png' %}" alt="Pink Princess" class="product-img">
+            <h3><a href="{% url 'plant_details' 'pink-princess' %}">Pink Princess</a></h3>
+            <p>$150.00 CAD</p>
+            <form action="{% url 'add_to_cart' 'pink-princess' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+
     </div>
 </section>
 
