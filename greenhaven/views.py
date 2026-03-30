@@ -1,182 +1,14 @@
-from django.shortcuts import render, redirect
-from .models import Customer
-
-PLANTS = {
-    'begonia': {
-        'name': 'Begonia',
-        'price': '$35.00 CAD',
-        'image': 'greenhaven/images/Begonia.png',
-        'size': 'Small',
-        'stock': 'In Stock',
-        'description': 'Begonia is a decorative indoor plant with attractive leaves and a soft elegant look.',
-        'care': [
-            'Bright indirect light',
-            'Water when soil feels slightly dry',
-            'Keep away from strong direct sun',
-            'Prefers moderate humidity'
-        ]
-    },
-    'marble-queen': {
-        'name': 'Marble Queen',
-        'price': '$45.00 CAD',
-        'image': 'greenhaven/images/Marble Queen.png',
-        'size': 'Medium',
-        'stock': 'In Stock',
-        'description': 'Marble Queen is a beautiful pothos variety with creamy white and green variegated leaves.',
-        'care': [
-            'Bright indirect light',
-            'Water once top soil dries',
-            'Easy to maintain',
-            'Good for shelves and desks'
-        ]
-    },
-    'calathea': {
-        'name': 'Calathea',
-        'price': '$78.00 CAD',
-        'image': 'greenhaven/images/Calathea.png',
-        'size': 'Medium',
-        'stock': 'In Stock',
-        'description': 'Calathea is known for its patterned foliage and adds a tropical feel indoors.',
-        'care': [
-            'Low to medium indirect light',
-            'Keep soil slightly moist',
-            'High humidity preferred',
-            'Avoid direct sunlight'
-        ]
-    },
-    'monstera-thai': {
-        'name': 'Monstera Thai',
-        'price': '$120.00 CAD',
-        'image': 'greenhaven/images/Monstera_Thai.png',
-        'size': 'Large',
-        'stock': 'Not in Stock',
-        'description': 'Monstera Thai has large split leaves with beautiful creamy variegation.',
-        'care': [
-            'Bright indirect light',
-            'Water when top soil dries',
-            'Support with moss pole if needed',
-            'Keep in warm indoor conditions'
-        ]
-    },
-    'pink-princess': {
-        'name': 'Pink Princess',
-        'price': '$150.00 CAD',
-        'image': 'greenhaven/images/Pink Princess.png',
-        'size': 'Medium',
-        'stock': 'Limited Stock',
-        'description': 'Pink Princess is a premium philodendron with stunning pink variegation.',
-        'care': [
-            'Bright indirect light',
-            'Water moderately',
-            'Use well-draining soil',
-            'Avoid overwatering'
-        ]
-    },
-    'snake-plant': {
-        'name': 'Snake Plant',
-        'price': '$55.00 CAD',
-        'image': 'greenhaven/images/Snake Plant.png',
-        'size': 'Medium',
-        'stock': 'In Stock',
-        'description': 'Snake Plant is a low-maintenance indoor plant perfect for beginners.',
-        'care': [
-            'Low to bright indirect light',
-            'Water sparingly',
-            'Very easy care',
-            'Tolerates dry indoor air'
-        ]
-    },
-    'string-of-hearts': {
-        'name': 'String of Hearts',
-        'price': '$42.00 CAD',
-        'image': 'greenhaven/images/String of Hearts.png',
-        'size': 'Small',
-        'stock': 'In Stock',
-        'description': 'String of Hearts is a trailing plant with delicate heart-shaped leaves.',
-        'care': [
-            'Bright indirect light',
-            'Let soil dry slightly between watering',
-            'Great for hanging pots',
-            'Avoid soggy soil'
-        ]
-    },
-    'verrucosum': {
-        'name': 'Verrucosum',
-        'price': '$95.00 CAD',
-        'image': 'greenhaven/images/Verrucosum.png',
-        'size': 'Medium',
-        'stock': 'In Stock',
-        'description': 'Verrucosum is a velvety tropical plant with rich green leaves and striking texture.',
-        'care': [
-            'Bright indirect light',
-            'Keep humidity high',
-            'Use airy soil mix',
-            'Water regularly but avoid overwatering'
-        ]
-    },
-    'monstera-albo': {
-        'name': 'Monstera Albo',
-        'price': '$135.00 CAD',
-        'image': 'greenhaven/images/Monstera Albo.png',
-        'size': 'Large',
-        'stock': 'In Stock',
-        'description': 'Monstera Albo is a rare premium plant with dramatic white variegation.',
-        'care': [
-            'Bright indirect light',
-            'Water when soil partly dries',
-            'Needs support as it grows',
-            'Protect from harsh direct sunlight'
-        ]
-    },
-    'jasmine': {
-        'name': 'Jasmine',
-        'price': '$60.00 CAD',
-        'image': 'greenhaven/images/Jasmine.png',
-        'size': 'Medium',
-        'stock': 'In Stock',
-        'description': 'A fragrant flowering plant that adds freshness and elegance to indoor spaces.',
-        'care': [
-            'Place in bright indirect light',
-            'Water when the top soil feels dry',
-            'Keep in a warm environment',
-            'Prune lightly to encourage growth'
-        ]
-    },
-    'masoniana': {
-        'name': 'Masoniana',
-        'price': '$85.00 CAD',
-        'image': 'greenhaven/images/Masoniana.png',
-        'size': 'Medium',
-        'stock': 'In Stock',
-        'description': 'A striking foliage plant known for its textured leaves and bold appearance.',
-        'care': [
-            'Provide bright indirect light',
-            'Water moderately',
-            'Avoid overwatering',
-            'Maintain good humidity'
-        ]
-    },
-    'sumatra': {
-        'name': 'Sumatra',
-        'price': '$70.00 CAD',
-        'image': 'greenhaven/images/Sumatra.png',
-        'size': 'Medium',
-        'stock': 'In Stock',
-        'description': 'A beautiful ornamental plant with colorful foliage that stands out in any collection.',
-        'care': [
-            'Keep in filtered light',
-            'Water when soil is slightly dry',
-            'Avoid cold drafts',
-            'Use well-draining soil'
-        ]
-    },
-}
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Customer, Plant
 
 
 def home(request):
     customer_name = request.session.get('customer_name')
+    featured_plants = Plant.objects.all()[:6]
+
     return render(request, 'greenhaven/home.html', {
-        'customer_name': customer_name
+        'customer_name': customer_name,
+        'featured_plants': featured_plants
     })
 
 
@@ -255,7 +87,7 @@ def cart(request):
     total = 0
     for item in cart_items:
         price_number = float(
-            item['price'].replace('$', '').replace('CAD', '').strip()
+            str(item['price']).replace('$', '').replace('CAD', '').strip()
         )
         total += price_number * item['quantity']
 
@@ -272,36 +104,36 @@ def order_payment(request):
 
 
 def plant_details(request, plant_name):
-    plant = PLANTS.get(plant_name)
+    plant = get_object_or_404(Plant, slug=plant_name)
+    care_list = [line.strip() for line in plant.care_instructions.split('\n') if line.strip()]
+
     return render(request, 'greenhaven/plant_details.html', {
         'plant': plant,
-        'plant_slug': plant_name
+        'plant_slug': plant.slug,
+        'care_list': care_list
     })
 
 
 def add_to_cart(request, plant_name):
     if request.method == "POST":
-        plant = PLANTS.get(plant_name)
-
-        if not plant:
-            return redirect('home')
+        plant = get_object_or_404(Plant, slug=plant_name)
 
         quantity = int(request.POST.get('quantity', 1))
         cart = request.session.get('cart', [])
 
         found = False
         for item in cart:
-            if item['slug'] == plant_name:
+            if item['slug'] == plant.slug:
                 item['quantity'] += quantity
                 found = True
                 break
 
         if not found:
             cart.append({
-                'slug': plant_name,
-                'name': plant['name'],
-                'price': plant['price'],
-                'image': plant['image'],
+                'slug': plant.slug,
+                'name': plant.name,
+                'price': str(plant.price),
+                'image': plant.image,
                 'quantity': quantity
             })
 
@@ -320,38 +152,21 @@ def clear_cart(request):
 
 
 def houseplants(request):
-    all_plants = []
-
-    for slug, plant in PLANTS.items():
-        all_plants.append({
-            'slug': slug,
-            'name': plant['name'],
-            'price': plant['price'],
-            'image': plant['image'],
-            'stock': plant['stock'],
-        })
+    plants = Plant.objects.all()
 
     return render(request, 'greenhaven/houseplants.html', {
-        'plants': all_plants
+        'plants': plants
     })
 
 
 def search_plants(request):
-    query = request.GET.get('q', '').strip().lower()
-    results = []
+    query = request.GET.get('q', '').strip()
+    results = Plant.objects.none()
 
     if query:
-        for slug, plant in PLANTS.items():
-            if query in plant['name'].lower():
-                results.append({
-                    'slug': slug,
-                    'name': plant['name'],
-                    'price': plant['price'],
-                    'image': plant['image'],
-                    'stock': plant['stock'],
-                })
+        results = Plant.objects.filter(name__icontains=query)
 
     return render(request, 'greenhaven/search_results.html', {
-        'query': request.GET.get('q', '').strip(),
+        'query': query,
         'results': results
     })

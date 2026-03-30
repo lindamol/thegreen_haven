@@ -28,7 +28,7 @@
                 <a href="{% url 'plant_details' plant.slug %}">{{ plant.name }}</a>
             </h3>
 
-            <p>{{ plant.price }}</p>
+            <p>${{ plant.price }} CAD</p>
 
             <form method="POST" action="{% url 'add_to_cart' plant.slug %}">
                 {% csrf_token %}
@@ -36,6 +36,8 @@
                 <button type="submit">Add to Cart</button>
             </form>
         </div>
+        {% empty %}
+        <p style="text-align:center;">No plants available.</p>
         {% endfor %}
     </div>
 </section>

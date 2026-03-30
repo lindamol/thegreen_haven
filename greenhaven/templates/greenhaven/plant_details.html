@@ -14,7 +14,7 @@
         <div class="details-info">
             <h1>{{ plant.name }}</h1>
 
-            <p class="details-price">{{ plant.price }}</p>
+            <p class="details-price">${{ plant.price }} CAD</p>
 
             <p class="details-size">
                 <strong>Size:</strong> {{ plant.size }}
@@ -32,7 +32,7 @@
             <div class="details-care">
                 <h3>Care Instructions</h3>
                 <ul>
-                    {% for item in plant.care %}
+                    {% for item in care_list %}
                         <li>{{ item }}</li>
                     {% endfor %}
                 </ul>

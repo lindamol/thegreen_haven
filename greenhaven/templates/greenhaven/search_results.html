@@ -22,7 +22,7 @@
                         <a href="{% url 'plant_details' plant.slug %}">{{ plant.name }}</a>
                     </h3>
 
-                    <p>{{ plant.price }}</p>
+                    <p>${{ plant.price }} CAD</p>
 
                     <form action="{% url 'add_to_cart' plant.slug %}" method="POST">
                         {% csrf_token %}
