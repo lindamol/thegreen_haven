@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from .models import Customer
 
 PLANTS = {
     'begonia': {
@@ -173,15 +174,79 @@ PLANTS = {
 
 
 def home(request):
-    return render(request, 'greenhaven/home.html')
+    customer_name = request.session.get('customer_name')
+    return render(request, 'greenhaven/home.html', {
+        'customer_name': customer_name
+    })
 
 
 def register(request):
-    return render(request, 'greenhaven/register.html')
+    success = False
+    error = ""
+
+    if request.method == "POST":
+        name = request.POST.get("name", "").strip()
+        email = request.POST.get("email", "").strip()
+        phone = request.POST.get("phone", "").strip()
+        address = request.POST.get("address", "").strip()
+        username = request.POST.get("username", "").strip()
+        password = request.POST.get("password", "").strip()
+
+        if not all([name, email, phone, address, username, password]):
+            error = "Please fill in all fields."
+        elif Customer.objects.filter(email=email).exists():
+            error = "This email is already registered."
+        elif Customer.objects.filter(username=username).exists():
+            error = "This username is already taken."
+        else:
+            Customer.objects.create(
+                name=name,
+                email=email,
+                phone=phone,
+                address=address,
+                username=username,
+                password=password
+            )
+            success = True
+
+    return render(request, 'greenhaven/register.html', {
+        'success': success,
+        'error': error
+    })
 
 
 def login_view(request):
-    return render(request, 'greenhaven/login.html')
+    success = False
+    error = ""
+
+    if request.method == "POST":
+        username = request.POST.get("username", "").strip()
+        password = request.POST.get("password", "").strip()
+
+        if not username or not password:
+            error = "Please enter both username and password."
+        else:
+            customer = Customer.objects.filter(
+                username=username,
+                password=password
+            ).first()
+
+            if customer:
+                request.session['customer_id'] = customer.id
+                request.session['customer_name'] = customer.name
+                success = True
+            else:
+                error = "Invalid username or password."
+
+    return render(request, 'greenhaven/login.html', {
+        'success': success,
+        'error': error
+    })
+
+
+def logout_view(request):
+    request.session.flush()
+    return redirect('home')
 
 
 def cart(request):

@@ -6,7 +6,11 @@
     <div class="form-card">
         <h2>Create Account</h2>
 
-        <form id="registerForm">
+        {% if error %}
+            <p style="color: red; text-align: center; margin-bottom: 15px;">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
             {% csrf_token %}
 
             <input type="text" name="name" placeholder="Full Name" required>
@@ -21,23 +25,17 @@
     </div>
 </section>
 
-<!-- ✅ SUCCESS MODAL -->
-<div id="successModal" class="modal">
+{% if success %}
+<div id="successModal" class="modal" style="display: flex;">
     <div class="modal-content">
         <h3>Registration Successful</h3>
         <p>Your account has been created successfully 🌿</p>
         <button onclick="closeModal()">OK</button>
     </div>
 </div>
+{% endif %}
 
 <script>
-document.getElementById("registerForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    // show modal
-    document.getElementById("successModal").style.display = "flex";
-});
-
 function closeModal() {
     document.getElementById("successModal").style.display = "none";
     window.location.href = "{% url 'home' %}";

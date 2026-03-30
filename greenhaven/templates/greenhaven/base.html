@@ -30,8 +30,16 @@
         <nav class="main-nav">
             <a href="{% url 'home' %}">Home</a>
             <a href="{% url 'houseplants' %}">Houseplants</a>
-            <a href="{% url 'login' %}">Login</a>
-            <a href="{% url 'register' %}">Register</a>
+
+            {% if request.session.customer_name %}
+                <a href="{% url 'logout' %}">Logout</a>
+                <span style="margin-left: 10px; font-weight: 600; color: #1f6b45;">
+                    {{ request.session.customer_name }}
+                </span>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register' %}">Register</a>
+            {% endif %}
         </nav>
 
         <div class="header-right">

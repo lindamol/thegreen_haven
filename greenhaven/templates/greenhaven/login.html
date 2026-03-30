@@ -5,6 +5,10 @@
     <div class="form-card">
         <h2>Login</h2>
 
+        {% if error %}
+            <p style="color: red; text-align: center; margin-bottom: 15px;">{{ error }}</p>
+        {% endif %}
+
         <form method="POST">
             {% csrf_token %}
 
@@ -20,4 +24,21 @@
         </p>
     </div>
 </div>
+
+{% if success %}
+<div id="successModal" class="modal" style="display: flex;">
+    <div class="modal-content">
+        <h3>Login Successful</h3>
+        <p>Welcome back 🌿</p>
+        <button onclick="closeModal()">OK</button>
+    </div>
+</div>
+{% endif %}
+
+<script>
+function closeModal() {
+    document.getElementById("successModal").style.display = "none";
+    window.location.href = "{% url 'home' %}";
+}
+</script>
 {% endblock %}
