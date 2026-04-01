@@ -22,22 +22,20 @@
                     <div class="cart-item">
 
                         <div class="cart-product">
-                            <img src="{% static item.image %}" alt="{{ item.name }}" class="cart-item-img">
+                            <img src="{% static item.plant.image %}" alt="{{ item.plant.name }}" class="cart-item-img">
 
                             <div class="cart-item-info">
-                                <h3>{{ item.name }}</h3>
-                                <p class="cart-price">{{ item.price }}</p>
+                                <h3>{{ item.plant.name }}</h3>
+                                <p class="cart-price">${{ item.plant.price }} CAD</p>
 
                                 <div class="cart-qty">
-                                    <button type="button">−</button>
                                     <span>{{ item.quantity }}</span>
-                                    <button type="button">+</button>
                                 </div>
                             </div>
                         </div>
 
                         <div class="cart-total">
-                            {{ item.price }}
+                            ${{ item.plant.price|floatformat:2 }} CAD
                         </div>
 
                     </div>

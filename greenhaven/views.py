@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Customer, Plant
+from .models import Customer, Plant, Cart, Cart_Item
 
 
 def home(request):
@@ -82,14 +82,19 @@ def logout_view(request):
 
 
 def cart(request):
-    cart_items = request.session.get('cart', [])
+    customer_id = request.session.get('customer_id')
+
+    if not customer_id:
+        return redirect('login')
+
+    customer = get_object_or_404(Customer, id=customer_id)
+    cart_obj, created = Cart.objects.get_or_create(customer=customer)
+
+    cart_items = Cart_Item.objects.filter(cart=cart_obj).select_related('plant')
 
     total = 0
     for item in cart_items:
-        price_number = float(
-            str(item['price']).replace('$', '').replace('CAD', '').strip()
-        )
-        total += price_number * item['quantity']
+        total += float(item.plant.price) * item.quantity
 
     total_price = f"${total:.2f} CAD"
 
@@ -115,39 +120,45 @@ def plant_details(request, plant_name):
 
 
 def add_to_cart(request, plant_name):
-    if request.method == "POST":
-        plant = get_object_or_404(Plant, slug=plant_name)
+    if request.method != "POST":
+        return redirect('home')
 
-        quantity = int(request.POST.get('quantity', 1))
-        cart = request.session.get('cart', [])
+    customer_id = request.session.get('customer_id')
+    if not customer_id:
+        return redirect('login')
 
-        found = False
-        for item in cart:
-            if item['slug'] == plant.slug:
-                item['quantity'] += quantity
-                found = True
-                break
+    customer = get_object_or_404(Customer, id=customer_id)
+    plant = get_object_or_404(Plant, slug=plant_name)
 
-        if not found:
-            cart.append({
-                'slug': plant.slug,
-                'name': plant.name,
-                'price': str(plant.price),
-                'image': plant.image,
-                'quantity': quantity
-            })
+    quantity = int(request.POST.get('quantity', 1))
 
-        request.session['cart'] = cart
-        request.session.modified = True
+    cart_obj, created = Cart.objects.get_or_create(customer=customer)
 
-        return redirect('cart')
+    cart_item, created = Cart_Item.objects.get_or_create(
+        cart=cart_obj,
+        plant=plant,
+        defaults={'quantity': quantity}
+    )
 
-    return redirect('home')
+    if not created:
+        cart_item.quantity += quantity
+        cart_item.save()
+
+    return redirect('cart')
 
 
 def clear_cart(request):
-    request.session['cart'] = []
-    request.session.modified = True
+    customer_id = request.session.get('customer_id')
+
+    if not customer_id:
+        return redirect('login')
+
+    customer = get_object_or_404(Customer, id=customer_id)
+    cart_obj = Cart.objects.filter(customer=customer).first()
+
+    if cart_obj:
+        Cart_Item.objects.filter(cart=cart_obj).delete()
+
     return redirect('cart')
 
 
