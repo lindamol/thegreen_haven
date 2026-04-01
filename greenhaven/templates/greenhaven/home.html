@@ -25,13 +25,25 @@
     <div class="product-grid">
         {% for plant in featured_plants %}
         <div class="product-card">
-            <img src="{% static plant.image %}" alt="{{ plant.name }}" class="product-img">
-            <h3><a href="{% url 'plant_details' plant.slug %}">{{ plant.name }}</a></h3>
+
+            <!-- ✅ FIXED: IMAGE CLICKABLE -->
+            <a href="{% url 'plant_details' plant.slug %}">
+                <img src="{% static plant.image %}" alt="{{ plant.name }}" class="product-img">
+            </a>
+
+            <h3>
+                <a href="{% url 'plant_details' plant.slug %}">
+                    {{ plant.name }}
+                </a>
+            </h3>
+
             <p>${{ plant.price }} CAD</p>
+
             <form action="{% url 'add_to_cart' plant.slug %}" method="POST">
                 {% csrf_token %}
                 <button type="submit">Add to Cart</button>
             </form>
+
         </div>
         {% empty %}
         <p style="text-align:center;">No plants available.</p>

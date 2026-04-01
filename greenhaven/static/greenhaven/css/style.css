@@ -588,6 +588,7 @@ a {
 .cart-qty {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     border: 1px solid #a9a397;
     border-radius: 999px;
     overflow: hidden;
@@ -595,23 +596,27 @@ a {
     width: 115px;
 }
 
-.cart-qty button {
-    width: 48px;
-    height: 52px;
+/* FIXED: changed from button → .qty-btn */
+.cart-qty .qty-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     background: transparent;
-    font-size: 20px;
+    font-size: 18px;
     color: #3a3a3a;
     cursor: pointer;
 }
 
+/* FIXED: better alignment */
 .cart-qty span {
-    width: 20px;
+    min-width: 20px;
     text-align: center;
-    font-size: 24px;
+    font-size: 15px;
     color: #2f2f2f;
 }
-
 .cart-footer {
     padding-top: 22px;
 }

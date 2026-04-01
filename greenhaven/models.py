@@ -40,9 +40,22 @@ class Cart_Item(models.Model):
     plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
-    # ✅ COMPOSITE KEY (IMPORTANT)
     class Meta:
-        unique_together = ('cart', 'plant')
+        unique_together = ('cart', 'plant')  # ✅ composite key
 
     def __str__(self):
         return f"{self.cart} - {self.plant} ({self.quantity})"
+
+
+# ✅ NEW TABLE (IMPORTANT)
+class Order(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, default='Completed')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Order {self.id} - {self.customer.name}"

@@ -5,21 +5,23 @@
     <div class="form-card">
         <h2>Order & Payment</h2>
 
-        <form id="orderPaymentForm">
-            <input type="text" placeholder="Shipping Address" required>
-            <input type="text" placeholder="City" required>
-            <input type="text" placeholder="Postal Code" required>
-            <input type="text" placeholder="Card Number" required>
-            <input type="text" placeholder="Card Holder Name" required>
-            <input type="text" placeholder="Expiry Date" required>
-            <input type="text" placeholder="CVV" required>
+        <form id="orderPaymentForm" method="POST">
+            {% csrf_token %}
+
+            <input type="text" name="shipping_address" placeholder="Shipping Address" required>
+            <input type="text" name="city" placeholder="City" required>
+            <input type="text" name="postal_code" placeholder="Postal Code" required>
+            <input type="text" name="card_number" placeholder="Card Number" required>
+            <input type="text" name="card_holder_name" placeholder="Card Holder Name" required>
+            <input type="text" name="expiry_date" placeholder="Expiry Date" required>
+            <input type="text" name="cvv" placeholder="CVV" required>
+
             <button type="submit">Pay Now</button>
         </form>
     </div>
 </section>
 
-<!-- ✅ CUSTOM SUCCESS POPUP -->
-<div id="successModal" class="modal">
+<div id="successModal" class="modal" style="display: none;">
     <div class="modal-content">
         <h3>Payment Successful</h3>
         <p>Your order has been placed successfully 🌿</p>
@@ -28,12 +30,11 @@
 </div>
 
 <script>
-document.getElementById("orderPaymentForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    // Show modal instead of alert
-    document.getElementById("successModal").style.display = "flex";
-});
+window.onload = function () {
+    {% if success %}
+        document.getElementById("successModal").style.display = "flex";
+    {% endif %}
+};
 
 function closeModal() {
     window.location.href = "{% url 'home' %}";

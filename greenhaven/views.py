@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Customer, Plant, Cart, Cart_Item
+from .models import Customer, Plant, Cart, Cart_Item, Order
 
 
 def home(request):
@@ -105,6 +105,36 @@ def cart(request):
 
 
 def order_payment(request):
+    customer_id = request.session.get('customer_id')
+
+    if not customer_id:
+        return redirect('login')
+
+    customer = get_object_or_404(Customer, id=customer_id)
+    cart_obj = Cart.objects.filter(customer=customer).first()
+
+    if not cart_obj:
+        return redirect('cart')
+
+    cart_items = Cart_Item.objects.filter(cart=cart_obj)
+
+    if request.method == "POST":
+        total = 0
+        for item in cart_items:
+            total += float(item.plant.price) * item.quantity
+
+        Order.objects.create(
+            customer=customer,
+            cart=cart_obj,
+            total_amount=total
+        )
+
+        cart_items.delete()
+
+        return render(request, 'greenhaven/order_payment.html', {
+            'success': True
+        })
+
     return render(request, 'greenhaven/order_payment.html')
 
 
@@ -143,6 +173,41 @@ def add_to_cart(request, plant_name):
     if not created:
         cart_item.quantity += quantity
         cart_item.save()
+
+    return redirect('cart')
+
+
+def increase_cart_item(request, item_id):
+    customer_id = request.session.get('customer_id')
+    if not customer_id:
+        return redirect('login')
+
+    cart_item = get_object_or_404(Cart_Item, id=item_id)
+
+    if cart_item.cart.customer.id != customer_id:
+        return redirect('cart')
+
+    cart_item.quantity += 1
+    cart_item.save()
+
+    return redirect('cart')
+
+
+def decrease_cart_item(request, item_id):
+    customer_id = request.session.get('customer_id')
+    if not customer_id:
+        return redirect('login')
+
+    cart_item = get_object_or_404(Cart_Item, id=item_id)
+
+    if cart_item.cart.customer.id != customer_id:
+        return redirect('cart')
+
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
 
     return redirect('cart')
 
