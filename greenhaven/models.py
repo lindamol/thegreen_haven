@@ -31,6 +31,10 @@ class Cart(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    # ✅ NEW FIELDS (ADDED)
+    updated_at = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=20, default='Active')
+
     def __str__(self):
         return f"Cart {self.id} - {self.customer.name}"
 
@@ -47,7 +51,6 @@ class Cart_Item(models.Model):
         return f"{self.cart} - {self.plant} ({self.quantity})"
 
 
-# ✅ NEW TABLE (IMPORTANT)
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
