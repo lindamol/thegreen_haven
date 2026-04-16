@@ -4,7 +4,23 @@
 {% block content %}
 
 <section class="details-page">
-    {% if plant %}
+
+    <!-- ✅ EXCEPTION MESSAGE -->
+    {% if error %}
+    <div class="details-card">
+        <div class="details-info" style="text-align:center;">
+            <h1 style="color:#2f6f4f;">Plant Not Found</h1>
+            <p style="margin-top:10px;">
+                The plant you are looking for does not exist or may have been removed.
+            </p>
+
+            <a href="{% url 'houseplants' %}" class="details-btn" style="margin-top:20px; display:inline-block;">
+                Browse Plants
+            </a>
+        </div>
+    </div>
+
+    {% elif plant %}
     <div class="details-card">
 
         <div class="details-image">
@@ -14,7 +30,7 @@
         <div class="details-info">
             <h1>{{ plant.name }}</h1>
 
-            <p class="details-price">${{ plant.price }} CAD</p>
+            <p class="details-price">{{ plant.price }}</p>
 
             <p class="details-size">
                 <strong>Size:</strong> {{ plant.size }}
@@ -32,7 +48,7 @@
             <div class="details-care">
                 <h3>Care Instructions</h3>
                 <ul>
-                    {% for item in care_list %}
+                    {% for item in plant.care %}
                         <li>{{ item }}</li>
                     {% endfor %}
                 </ul>
@@ -58,13 +74,7 @@
         </div>
 
     </div>
-    {% else %}
-    <div class="details-card">
-        <div class="details-info">
-            <h1>Plant not found</h1>
-            <p>This product does not exist.</p>
-        </div>
-    </div>
+
     {% endif %}
 </section>
 

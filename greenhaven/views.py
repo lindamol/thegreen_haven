@@ -139,14 +139,25 @@ def order_payment(request):
 
 
 def plant_details(request, plant_name):
-    plant = get_object_or_404(Plant, slug=plant_name)
-    care_list = [line.strip() for line in plant.care_instructions.split('\n') if line.strip()]
+    try:
+        plant = Plant.objects.get(slug=plant_name)
 
-    return render(request, 'greenhaven/plant_details.html', {
-        'plant': plant,
-        'plant_slug': plant.slug,
-        'care_list': care_list
-    })
+        care_list = [
+            line.strip()
+            for line in plant.care_instructions.split('\n')
+            if line.strip()
+        ]
+
+        return render(request, 'greenhaven/plant_details.html', {
+            'plant': plant,
+            'plant_slug': plant.slug,
+            'care_list': care_list
+        })
+
+    except Plant.DoesNotExist:
+        return render(request, 'greenhaven/plant_details.html', {
+            'error': 'Plant not found'
+        })
 
 
 def add_to_cart(request, plant_name):
